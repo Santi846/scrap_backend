@@ -1,5 +1,6 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
+const credentials = require ("./credentials.js");
 
 (async function test() {
   let driver = new Builder()
@@ -15,8 +16,8 @@ const chrome = require('selenium-webdriver/chrome');
 
   let element = await driver.findElement(By.xpath("/html//div/main/main/div/form/div[4]/button[@class='SAML_button__L+UyC']")).click();
 
-  let user_entry = 'santiago.arocha@sonda.com';
-  let password_entry = 'Viernes.2601';
+  let user_entry = credentials.email;
+  let password_entry = credentials.password;
 
   try {
     // Wait until the login page has loaded
