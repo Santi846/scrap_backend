@@ -1,6 +1,7 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
-const credentials = require ("./credentials.js");
+// const credentials = require ("./credentials.js");
+const credentials = require('./credentials.js');
 
 (async function test() {
   let driver = new Builder()
@@ -31,7 +32,7 @@ const credentials = require ("./credentials.js");
     await driver.findElement(By.xpath("/html//div[2]/div[2]/div[1]/div[2]/div/div/form/div[2]/div[4]/span[@id='submitButton']")).click();
 
     // Wait until the token is present
-    await driver.wait(until.elementLocated(By.className("Header_header__-A3K5")), 10000);
+    await driver.wait(until.elementLocated(By.className("Header_header__-A3K5")), 50000);
 
     // Perform the desired actions
     await driver.findElement(By.xpath("//span[contains(text(),'Crear caso')]")).click();
