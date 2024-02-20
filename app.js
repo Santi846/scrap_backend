@@ -1,15 +1,31 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
-// const credentials = require ("./credentials.js");
+const path = require('chromedriver').path;
 const credentials = require('./credentials.js');
 
-(async function test() {
-  let driver = new Builder()
-    .forBrowser('chrome')
-    // .setChromeOptions(new chrome.Options().headless())
-    .setChromeOptions(new chrome.Options())
-    .build();
 
+try {
+  (async function test() {
+  
+
+    // let chromeOptions = new chrome.Options();
+
+    // let driver = new Builder()
+    //   .forBrowser('chrome')
+    //   .setChromeOptions(chromeOptions)
+    //   .setChromeService(new chrome.ServiceBuilder(path).build())
+    //   .build();
+
+
+      let chromeOptions = new chrome.Options();
+      chromeOptions.setChromeService(new chrome.ServiceBuilder(path).build());
+  
+      let driver = new Builder()
+        .forBrowser('chrome')
+        .setChromeOptions(chromeOptions)
+        .build();
+  
+  
   await driver.get('https://itsm.sonda.com/asmsspecialist/index.html#/project=MTc=');
 
   // Wait for up to 10 seconds for the element to appear
@@ -19,6 +35,8 @@ const credentials = require('./credentials.js');
 
   let user_entry = credentials.email;
   let password_entry = credentials.password;
+  
+  
 
   try {
     // Wait until the login page has loaded
@@ -44,3 +62,7 @@ const credentials = require('./credentials.js');
     await driver.quit();
   }
 })();
+} catch (error) {
+  console.log(error);
+}
+
