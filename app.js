@@ -17,9 +17,15 @@ try {
     //   .build();
 
 
-      let chromeOptions = new chrome.Options();
-      chromeOptions.setChromeService(new chrome.ServiceBuilder(path).build());
+      // let chromeOptions = new chrome.Options();
+      // chromeOptions.setChromeService(new chrome.ServiceBuilder(path).build());
   
+      // let driver = new Builder()
+      //   .forBrowser('chrome')
+      //   .setChromeOptions(chromeOptions)
+      //   .build();
+      let chromeOptions = new chrome.Options();
+
       let driver = new Builder()
         .forBrowser('chrome')
         .setChromeOptions(chromeOptions)
