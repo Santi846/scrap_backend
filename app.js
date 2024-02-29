@@ -42,31 +42,39 @@ try {
   let user_entry = credentials.email;
   let password_entry = credentials.password;
   
+  let tk_type = "Crear caso";
+  if (tk_type == "Crear caso") {
+    try {
+      // Wait until the login page has loaded
+      await driver.wait(until.elementLocated(By.xpath("/html//div[2]/div[2]/div[1]/div[2]/div/div/form/div[2]/div[1]/input[@id='userNameInput']")), 10000);
   
+      // Enter user and password
+      await driver.findElement(By.xpath("/html//div[2]/div[2]/div[1]/div[2]/div/div/form/div[2]/div[1]/input[@id='userNameInput']")).sendKeys(user_entry);
+      await driver.findElement(By.xpath("/html//div[2]/div[2]/div[1]/div[2]/div/div/form/div[2]/div[2]/input[@id='passwordInput']")).sendKeys(password_entry);
+  
+      // Click on the login button
+      await driver.findElement(By.xpath("/html//div[2]/div[2]/div[1]/div[2]/div/div/form/div[2]/div[4]/span[@id='submitButton']")).click();
+  
+      // Wait until the token is present
+      await driver.wait(until.elementLocated(By.className("Header_header__-A3K5")), 50000);
+  
+      // Perform the desired actions
+      await driver.findElement(By.xpath("//span[contains(text(),'Crear caso')]")).click();
+      await driver.wait(until.elementLocated(By.className("Header_header__-A3K5")), 50000);
+      
+      let element = await driver.findElement(By.id('state'));
+      await element.click();
 
-  try {
-    // Wait until the login page has loaded
-    await driver.wait(until.elementLocated(By.xpath("/html//div[2]/div[2]/div[1]/div[2]/div/div/form/div[2]/div[1]/input[@id='userNameInput']")), 10000);
-
-    // Enter user and password
-    await driver.findElement(By.xpath("/html//div[2]/div[2]/div[1]/div[2]/div/div/form/div[2]/div[1]/input[@id='userNameInput']")).sendKeys(user_entry);
-    await driver.findElement(By.xpath("/html//div[2]/div[2]/div[1]/div[2]/div/div/form/div[2]/div[2]/input[@id='passwordInput']")).sendKeys(password_entry);
-
-    // Click on the login button
-    await driver.findElement(By.xpath("/html//div[2]/div[2]/div[1]/div[2]/div/div/form/div[2]/div[4]/span[@id='submitButton']")).click();
-
-    // Wait until the token is present
-    await driver.wait(until.elementLocated(By.className("Header_header__-A3K5")), 50000);
-
-    // Perform the desired actions
-    await driver.findElement(By.xpath("//span[contains(text(),'Crear caso')]")).click();
-    await driver.findElement(By.xpath("//body/div[@id='root']/main[1]/main[1]/div[1]/div[1]/div[3]/div[1]/div[1]/form[1]/div[2]/div[2]/button[1]")).click();
-
-  } catch (error) {
-    console.error('An error occurred:', error);
-  } finally {
-    await driver.quit();
+      let option = await driver.findElement(By.xpath("//span[contains(text(), 'En progreso')]"));
+      await option.click();
+  
+    } catch (error) {
+      console.error('An error occurred:', error);
+    } finally {
+      await driver.quit();
+    }
   }
+
 })();
 } catch (error) {
   console.log(error);
