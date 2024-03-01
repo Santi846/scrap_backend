@@ -62,11 +62,13 @@ try {
       await driver.findElement(By.xpath("//span[contains(text(),'Crear caso')]")).click();
       await driver.wait(until.elementLocated(By.className("Header_header__-A3K5")), 50000);
       
-      let element = await driver.findElement(By.id('state'));
+      let element = await driver.findElement(By.css("#itemType"));
       await element.click();
 
-      let option = await driver.findElement(By.xpath("//span[contains(text(), 'En progreso')]"));
+      let option = await driver.findElement(By.xpath("//span[contains(text(), 'Requerimiento de Servicio')]"));
+
       await option.click();
+      await driver.wait(until.elementLocated(By.className("Header_header__-A3K5")), 50000);
   
     } catch (error) {
       console.error('An error occurred:', error);
