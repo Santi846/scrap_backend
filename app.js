@@ -60,15 +60,39 @@ try {
   
       // Perform the desired actions
       await driver.findElement(By.xpath("//span[contains(text(),'Crear caso')]")).click();
-      await driver.wait(until.elementLocated(By.className("Header_header__-A3K5")), 50000);
+      // await driver.wait(until.elementLocated(By.className("Header_header__-A3K5")), 50000);
       
-      let element = await driver.findElement(By.css("#itemType"));
+      // let element = await driver.findElement(By.xpath("//body/div[@id='root']/main[1]/main[1]/div[1]/div[1]/div[3]/div[1]/div[1]/form[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/span[1]/button[1]"));
+      // await element.click();
+      // let option = await driver.findElement(By.xpath("//span[contains(text(), 'Requerimiento de Servicio')]"));
+
+      // await option.click();
+      // await driver.wait(until.elementLocated(By.className("Header_header__-A3K5")), 50000);
+
+      // let element = await driver.wait(until.elementLocated(By.xpath("//body/div[@id='root']/main[1]/main[1]/div[1]/div[1]/div[3]/div[1]/div[1]/form[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/span[1]/button[1]")), 10000);
+      // await driver.wait(until.elementIsVisible(element), 10000);
+      // await element.click();
+
+      // let option = await element.wait(until.elementLocated(By.xpath("//span[contains(text(), 'Requerimiento de Servicio')]")), 10000);
+      // await driver.wait(until.elementIsVisible(option), 10000);
+      // await option.click();
+      let element = await driver.wait(until.elementLocated(By.xpath("//body/div[@id='root']/main[1]/main[1]/div[1]/div[1]/div[3]/div[1]/div[1]/form[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/span[1]/button[1]")), 10000);
+      await driver.wait(until.elementIsVisible(element), 10000);
       await element.click();
 
-      let option = await driver.findElement(By.xpath("//span[contains(text(), 'Requerimiento de Servicio')]"));
+      // Locate and wait for the option to be visible
+      // let option = await driver.findElement(By.xpath("//option[contains(text(), 'Requerimiento de Servicio')]"));
+      // await driver.wait(until.elementIsVisible(option), 10000);
+      // await option.click();
 
-      await option.click();
-      await driver.wait(until.elementLocated(By.className("Header_header__-A3K5")), 50000);
+      let optionElement = await element.findElement(By.xpath('//span[contains(text(), "Requerimientos de Servicio")]'));
+      await driver.wait(until.elementIsVisible(optionElement), 10000);
+      await optionElement.click();
+
+      let service = await driver.findElement(By.xpath("//input[@id='service']")).sendKeys(' ');
+      let optionService = await service.findElement(By.xpath('//div[contains(text(), "UY - SOPORTE ON SITE CON TÉCNICOS RESIDENTES")]'));
+      await driver.wait(until.elementIsVisible(optionService), 10000);
+      await optionService.click();
   
     } catch (error) {
       console.error('An error occurred:', error);
